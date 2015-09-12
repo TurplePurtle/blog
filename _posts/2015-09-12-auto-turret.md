@@ -50,11 +50,16 @@ x<sup>2</sup> + y<sup>2</sup> = r<sup>2</sup>
 
 In order for the bullet to hit the target, we need that
 
-x<sub>target</sub> = x<sub>bullet</sub>
+x<sub>target</sub> = x<sub>bullet</sub>  
 y<sub>target</sub> = y<sub>bullet</sub>
 {:.text-center}
 
 The combined equation is:
+
+(v<sub>x</sub> t + x<sub>0</sub>)<sup>2</sup> + (v<sub>y</sub> t + y<sub>0</sub>)<sup>2</sup> = (\|v<sub>bullet</sub>\| t)<sup>2</sup>
+{:.text-center}
+
+Which can be rearranged into:
 
 (v<sub>x</sub><sup>2</sup> + v<sub>y</sub><sup>2</sup> - v<sub>bullet</sub><sup>2</sup>) t<sup>2</sup> + 2(v<sub>x</sub> x<sub>0</sub> + v<sub>y</sub> y<sub>0</sub>) t + x<sup>2</sup> + y<sup>2</sup> = 0
 {:.text-center}
@@ -64,7 +69,10 @@ Which, if you look at it long enough, has the form:
 at<sup>2</sup> + bt + c = 0
 {:.text-center}
 
-You likely learned how to solve this in high school using the quadratic equation.
+You likely learned how to solve this in high school using the quadratic equation:
+
+t = (-b +- sqrt(b<sup>2</sup> - 4 a c)) / (2 a)
+{:.text-center}
 
 {% highlight js %}
 function aim(thing) {
