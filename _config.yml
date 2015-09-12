@@ -1,7 +1,7 @@
 # Site settings
 title: TurpleBlog
 description: >
-  A blog for me to practice my writing skills, and possibly even captivate your
+  A blog for me to practice my writing skills, and possibly captivate your
   attention!
 baseurl: "/blog/" # the subpath of your site, e.g. /blog/
 url: "https://turplepurtle.com" # the base hostname & protocol for your site
