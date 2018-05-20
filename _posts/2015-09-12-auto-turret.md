@@ -113,6 +113,8 @@ You likely learned how to solve this in high school using the quadratic equation
 t = (-b +- sqrt(b<sup>2</sup> - 4 a c)) / (2 a)
 {:.text-center}
 
+If *a* ends up being 0 then you have an easy-peasy linear equation. The quadratic formula will blow up in our face if you apply it to a linear equation, so we handle this case separately (t = -c / b).
+
 You might also remember that a quadratic function can have 0, 1, or 2 solutions. In other words, it might be impossible to hit our target, and we might be able to shoot in two different directions and still hit it. Unfortunately, if we can't get a value for *t* (or if the solution is imaginary) we're out of luck!
 
 "How can we have 0 or 2 solutions?" you might ask. If you didn't ask that, you can skip the rest of this paragraph; otherwise read along. Well, if the target is flying away from our turret, and it travels faster than our bullets, then, unless we can bend space-time to our will, the bullet won't be able to catch up and there won't be a valid solution to our problem. We can have 2 solutions if our target travels faster than our bullet AND our target is moving closer to the turret: either 1) we hit the target as it comes towards us (the more likely choice), or 2) we shoot the bullet away from where the target is, but where the target will catch up with it and hit it (the less likely, and more silly, but still possible choice).
@@ -137,25 +139,30 @@ function shootTarget(x0, y0, vx, vy, vb) {
   var b = 2 * (x0*vx + y0*vy);
   var c = x0*x0 + y0*y0;
   var determinant = b*b - 4*a*c;
-
-  // if the determinant is negative, the solution is imaginary
-  // and we cannot hit our target
-  if (determinant < 0) return;
-
-  var t1 = (-b + Math.sqrt(determinant)) / (2*a);
-  var t2 = (-b - Math.sqrt(determinant)) / (2*a);
-
-  // Get the smallest t, where t >= 0
-  // if t < 0 then the solution is in the past
   var t;
-  if (t1 >= 0 && t2 >= 0) {
-    t = Math.min(t1, t2);
-  } else if (t1 >= 0) {
-    t = t1;
-  } else if (t2 >= 0) {
-    t = t2;
+
+  if (a === 0) {
+    // we have a linear equation
+    t = -c / b;
   } else {
-    return;
+    // if the determinant is negative, the solution is imaginary
+    // and we cannot hit our target
+    if (determinant < 0) return;
+
+    var t1 = (-b + Math.sqrt(determinant)) / (2*a);
+    var t2 = (-b - Math.sqrt(determinant)) / (2*a);
+
+    // Get the smallest t, where t >= 0
+    // if t < 0 then the solution is in the past
+    if (t1 >= 0 && t2 >= 0) {
+      t = Math.min(t1, t2);
+    } else if (t1 >= 0) {
+      t = t1;
+    } else if (t2 >= 0) {
+      t = t2;
+    } else {
+      return;
+    }
   }
 
   // find where the target will be at time t
